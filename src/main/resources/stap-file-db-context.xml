@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="poolProperties">
+            <bean class="org.apache.tomcat.jdbc.pool.PoolProperties">
+                <property name="url" value="jdbc:mysql://192.168.1.103:3306/stap-file"/>
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+                <property name="username" value="stap"/>
+                <property name="password" value="stap"/>
+                <property name="jmxEnabled" value="true"/>
+                <property name="testWhileIdle" value="true"/>
+                <property name="testOnBorrow" value="true"/>
+                <property name="validationInterval" value="30000"/>
+                <property name="testOnReturn" value="true"/>
+                <property name="validationQuery" value="select 1"/>
+                <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+                <property name="maxActive" value="100"/>
+                <property name="initialSize" value="10"/>
+                <property name="maxWait" value="10000"/>
+                <property name="removeAbandonedTimeout" value="60"/>
+                <property name="minEvictableIdleTimeMillis" value="30000"/>
+                <property name="minIdle" value="10"/>
+                <property name="logAbandoned" value="true"/>
+                <property name="removeAbandoned" value="true"/>
+                <property name="jdbcInterceptors" value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref local="dataSource" />
+        </property>
+    </bean>
+</beans>

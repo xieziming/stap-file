@@ -79,7 +79,6 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
